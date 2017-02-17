@@ -277,6 +277,22 @@ class CachedSpec extends PlaySpecification {
       defaultCache.get("unit") must beSome(())
       defaultCache.get[Any]("unit") must beSome(())
     }
+
+    "remove cache" in new WithApplication() {
+      val defaultCache = app.injector.instanceOf[CacheApi]
+      defaultCache.set("foo", "bar")
+      defaultCache.get("foo") must beSome("bar")
+      defaultCache.remove("foo")
+      defaultCache.get("foo") must beNone
+    }
+
+    "clear all cache" in new WithApplication() {
+      val defaultCache = app.injector.instanceOf[CacheApi]
+      defaultCache.set("foo", "bar")
+      defaultCache.get("foo") must beSome("bar")
+      defaultCache.clearAll
+      defaultCache.get("foo") must beNone
+    }
   }
 
   "EhCacheModule" should {

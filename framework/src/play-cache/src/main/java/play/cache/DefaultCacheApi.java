@@ -47,6 +47,10 @@ public class DefaultCacheApi implements CacheApi {
         cacheApi.remove(key);
     }
 
+    public void clearAll() {
+        cacheApi.clearAll();
+    }
+
     private Duration intToDuration(int seconds) {
       return seconds == 0 ? Duration.Inf() : Duration.apply(seconds, TimeUnit.SECONDS);
     }

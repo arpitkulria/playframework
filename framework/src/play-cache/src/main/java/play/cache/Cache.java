@@ -74,12 +74,23 @@ public class Cache {
     /**
      * Removes the entry at a specific key
      *
-     * @deprecated Please use non-static cacheApi.set(key,value,expiration), deprecated since 2.5.0
+     * @deprecated Please use non-static cacheApi.remove(key), deprecated since 2.5.0
      *
      * @param key the key whose entry to remove
      */
     @Deprecated
     public static void remove(String key) {
         cacheApi().remove(key);
+    }
+
+    /**
+     * Removes the entry at a specific key
+     *
+     * @deprecated Please use non-static cacheApi.clearAll(), deprecated since 2.5.0
+     *
+     */
+    @Deprecated
+    public static void clearAll() {
+        cacheApi().clearAll();
     }
 }

@@ -49,6 +49,11 @@ trait CacheApi {
    * @return result as Option[T]
    */
   def get[T: ClassTag](key: String): Option[T]
+
+  /**
+   * Remove all values from the cache
+   */
+  def clearAll
 }
 
 /**
@@ -136,6 +141,10 @@ object Cache {
   def remove(key: String)(implicit app: Application): Unit = {
     cacheApi.remove(key)
   }
+
+  @deprecated("Inject CacheApi into your component", "2.5.0")
+  def clearAll(implicit app: Application): Unit = cacheApi.clearAll
+
 }
 
 /**
@@ -297,4 +306,6 @@ class EhCacheApi @Inject() (cache: Ehcache) extends CacheApi {
   def remove(key: String) = {
     cache.remove(key)
   }
+
+  def clearAll = cache.removeAll
 }
